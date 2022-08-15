@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Counter } from './demo/counter';
+import { TextDemo } from './demo/TextDemo';
+import Demo1 from './demo1/demo1';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+// function App() {
+//   return (
+//     <div className="App">
+
+//     </div>
+//   );
+// }
+const App: React.FC = () => {
+  return <div >
+    {/* <TextDemo text="chào a cường củi" 
+    person={{ firstName: '', lastName: '' }} 
+    handleChange = {e => {
+      
+    }}
+    />
+    <Counter>
+      {({ count, setCount }) => (
+        <div >
+          {count}
+          <button onClick={() => setCount(count + 1)}>+</button>
+        </div>
+      )}
+    </Counter> */}
+
+    {/* demo 1  */}
+    <Demo1/>
+
+
+  </div>
 }
-
 export default App;

@@ -58,16 +58,16 @@ function TextWithNumber({
 //  list 
 function List<ListItem>(
     {
-        item,
+        items,
         render
     }: {
-        item: ListItem[];
+        items: ListItem[];
         render: (item: ListItem) => ReactNode;
     }
 ) {
     return (
         <ul>
-            {item.map((item, index) => (
+            {items.map((item, index) => (
                 < li key={index}>
                     {render(item)}
                 </li>
@@ -94,9 +94,8 @@ const Demo1 = () => {
             <TextWithNumber header={(num: number) => <span >Header : {num}</span>}>
                 {(num: number) => <div > phú bú z ú tổng số ngày là:| {num}</div>}
             </TextWithNumber>
-            <List item= {["vuong" , "phú", "cường"]} 
-            render={(item:string) => <div>{item.toLocaleLowerCase()}</div>}> 
-            </List>
+            <List items={["vuong", "phú", "cường"]} render={(item: string) => <div > {item.toLocaleLowerCase()}</div>} />
+  
         </div>
     )
 }

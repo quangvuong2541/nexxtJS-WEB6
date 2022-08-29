@@ -7,7 +7,8 @@ import { Badge, Grid, LinearProgress } from '@mui/material';
 import { Drawer } from '@mui/material';
 import { Wrapper, StyledButton } from './app.styles';
 import Cart from "./shoppingCart/cart/Cart"
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Item from './shoppingCart/Item/item';
 // function App() {
 //   return (
 //     <div className="App">
@@ -84,24 +85,19 @@ const App: React.FC = () => {
 
         />
       </Drawer>
-      <StyledButton >
+      <StyledButton  onClick={() => setCartOpen(true)}>
         <Badge badgeContent={getTotalItems(cartItem)} color='error'>
-          <ShoppingCartIcon />
+          <AddShoppingCartIcon />
         </Badge>
       </StyledButton>
-        <Grid >
-          
-        </Grid>
+      <Grid container spacing={3}>
+        {data?.map((item, key) => (
+          <Grid item key={key} xs={12} sm={4} >
+            <Item item={item} handleAddToCart={handleAddToCart} />
 
-
-
-
-
-
-
-
-
-
+          </Grid>
+        ))}
+      </Grid>
       {/* <TextDemo text="chào a cường củi" 
     person={{ firstName: '', lastName: '' }} 
     handleChange = {e => {

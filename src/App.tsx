@@ -9,6 +9,7 @@ import { Wrapper, StyledButton } from './app.styles';
 import Cart from "./shoppingCart/cart/Cart"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Item from './shoppingCart/Item/item';
+import LoginComponent from './login/Login';
 // function App() {
 //   return (
 //     <div className="App">
@@ -41,7 +42,7 @@ const App: React.FC = () => {
     'product',
     getProducts
   )
-  console.log(data);
+  // console.log(data);
   const getTotalItems = (items: CartItemType[]) => items.reduce((sum: number, item) => sum + item.price, 0)
 
   const handleAddToCart = (clickedItem: CartItemType) => {
@@ -76,48 +77,49 @@ const App: React.FC = () => {
   if (error) return <div>something went wrong ... </div>
 
   return (
-    <Wrapper >
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItem={cartItem}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
+    // <Wrapper >
+    //   <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+    //     <Cart
+    //       cartItem={cartItem}
+    //       addToCart={handleAddToCart}
+    //       removeFromCart={handleRemoveFromCart}
 
-        />
-      </Drawer>
-      <StyledButton  onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItem)} color='error'>
-          <AddShoppingCartIcon />
-        </Badge>
-      </StyledButton>
-      <Grid container spacing={3}>
-        {data?.map((item, key) => (
-          <Grid item key={key} xs={12} sm={4} >
-            <Item item={item} handleAddToCart={handleAddToCart} />
+    //     />
+    //   </Drawer>
+    //   <StyledButton  onClick={() => setCartOpen(true)}>
+    //     <Badge badgeContent={getTotalItems(cartItem)} color='error'>
+    //       <AddShoppingCartIcon />
+    //     </Badge>
+    //   </StyledButton>
+    //   <Grid container spacing={3}>
+    //     {data?.map((item, key) => (
+    //       <Grid item key={key} xs={12} sm={4} >
+    //         <Item item={item} handleAddToCart={handleAddToCart} />
 
-          </Grid>
-        ))}
-      </Grid>
-      {/* <TextDemo text="chào a cường củi" 
-    person={{ firstName: '', lastName: '' }} 
-    handleChange = {e => {
+    //       </Grid>
+    //     ))}
+    //   </Grid>
+    //   {/* <TextDemo text="chào a cường củi" 
+    // person={{ firstName: '', lastName: '' }} 
+    // handleChange = {e => {
       
-    }}
-    />
-    <Counter>
-      {({ count, setCount }) => (
-        <div >
-          {count}
-          <button onClick={() => setCount(count + 1)}>+</button>
-        </div>
-      )}
-    </Counter> */}
+    // }}
+    // />
+    // <Counter>
+    //   {({ count, setCount }) => (
+    //     <div >
+    //       {count}
+    //       <button onClick={() => setCount(count + 1)}>+</button>
+    //     </div>
+    //   )}
+    // </Counter> */}
 
-      {/* demo 1  */}
-      {/* <Demo1 /> */}
+    //   {/* demo 1  */}
+    //   {/* <Demo1 /> */}
 
 
-    </Wrapper>
+    // </Wrapper>
+    <LoginComponent/>
   )
 }
 export default App;

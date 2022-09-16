@@ -1,10 +1,7 @@
-import React, { useCallback, useRef, useMemo } from 'react'
-import { useTodo } from './useTodo';
+import React, { useCallback, useRef, useMemo } from "react";
+import { useTodos } from "./useTodo";
 
-
-
-const Heading = ({ title }: { title: string }) => <h2 >{title}</h2>
-
+const Heading = ({ title }: { title: string }) => <h2>{title}</h2>;
 type BoxProps = {
     children: React.ReactNode;
 };
@@ -17,13 +14,12 @@ const Box = (props: BoxProps) => {
         }}
     >{props.children}</div>;
 };
-
 const Button: React.FunctionComponent<
     React.DetailedHTMLProps<
         React.ButtonHTMLAttributes<HTMLButtonElement>,
         HTMLButtonElement
     > & {
-        title?: string
+        title?: string;
     }
 > = ({ title, children, style, ...rest }) => (
     <button
@@ -31,15 +27,13 @@ const Button: React.FunctionComponent<
         style={{
             ...style,
             backgroundColor: "red",
-            color: 'white',
-            fontStyle: 'xx-large'
+            color: "white",
+            fontSize: "xx-large",
         }}
-
     >
         {title ?? children}
     </button>
-)
-
+);
 
 function UL<T>({
     items,
@@ -51,7 +45,7 @@ function UL<T>({
 > & {
     items: T[];
     render: (item: T) => React.ReactNode;
-    itemClick: (item: T) => void
+    itemClick: (item: T) => void;
 }) {
     return (
         <ul>
@@ -60,38 +54,33 @@ function UL<T>({
                     {render(item)}
                 </li>
             ))}
-
         </ul>
-    )
+    );
 }
 
 function App() {
-    const inititalTodos = useMemo(
-        () => [{ id: 0, text: 'Hey there', done: false }],
+    const initialTodos = useMemo(
+        () => [{ id: 0, text: "Hey there", done: false }],
         []
-    )
-    const { 
-        isEditing,
-        todos,
-        addTodo,
-        removeTodo,
-        startWorking,
-        endWorking, } = useTodo(inititalTodos)
+    );
+    const { isEditing, todos, addTodo, removeTodo, startWorking, endWorking } =
+        useTodos(initialTodos);
 
-    // const newTodoRef = useRef<HTMLInputElement>(null)
+    const newTodoRef = useRef<HTMLInputElement>(null);
 
-    // const onAddTodo = useCallback(() => {
-    //     if (newTodoRef.current) {
-    //         addTodo(newTodoRef.current.value);
-    //         newTodoRef.current.value = ""
-    //     }
-    // }, [addTodo])
+    const onAddTodo = useCallback(() => {
+        if (newTodoRef.current) {
+            addTodo(newTodoRef.current.value);
+            newTodoRef.current.value = "";
+        }
+    }, [addTodo]);
+
     return (
         <div>
-            <Heading title="introduction" />
-            {/* <Box >hello chó phú</Box>
-            <Heading title="todos" />
+            <Heading title="Introduction" />
+            <Box>Hello there</Box>
 
+            <Heading title="Todos" />
             {isEditing && (
                 <>
                     <UL
@@ -101,21 +90,19 @@ function App() {
                             <>
                                 ({todo.done ? "Done" : "Not Done"}){todo.text}
                                 <button onClick={() => removeTodo(todo.id)}>Remove</button>
-
                             </>
                         )}
                     />
-                    <div >
+                    <div>
                         <input type="text" ref={newTodoRef} />
-                        <Button onClick={onAddTodo} >Add Todo</Button>
+                        <Button onClick={onAddTodo}>Add Todo</Button>
                     </div>
-                    <Button onClick={startWorking}>start working</Button>
+                    <Button onClick={startWorking}>Start Working</Button>
                 </>
             )}
-            {!isEditing && <Button onClick={endWorking}>Stop working</Button>} */}
-        </div >
-    )
-
+            {!isEditing && <Button onClick={endWorking}>Stop Working</Button>}
+        </div>
+    );
 }
 
-export default App
+export default App;

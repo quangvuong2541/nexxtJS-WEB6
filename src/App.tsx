@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import './App.css';
 import { Provider, useDispatch, useSelector } from "react-redux"
-
+import store, { selectTodos, addTodo, removeTodo } from './store';
 const Heading = ({ title }: { title: string }) => <h2>{title}</h2>
-interface MyProps {
-  children?: React.ReactNode;
-}
-const Box: React.FunctionComponent = () => (
-  <div
+
+
+type BoxProps = {
+  children: React.ReactNode;
+};
+
+const Box = (props: BoxProps) => {
+  return <div
     style={{
-      padding: "",
-      fontWeight: "",
+      padding: "1rem",
+      fontWeight: "bold",
     }}
-  >
-    {children}
-  </div>
-)
+  >{props.children}</div>;
+};
 
 const Button: React.FunctionComponent<
   React.DetailedHTMLProps<
@@ -61,12 +62,36 @@ function UL<T>({
   )
 }
 function App() {
-
-
+  const todos = useSelector(selectTodos)
+  const dispatch = useDispatch()
+  const newToRef = useRef<HTMLInputElement>(null)
+  const onAddToDo = useCallback(() => {
+    if (newToRef.current) {
+      dispatch(addTodo(newToRef.current.value))
+      newToRef.current.value = ""
+    }
+  }, [dispatch])
   return (
     <div >
-        <Heading title='Introduction'/>
-        <Box >Hello  phú</Box>
+      <Heading title='Introduction' />
+      <Box >Hello chó phú</Box>
+      <Heading title="Todos" />
+      <UL
+        items={todos}
+        itemClick={(item) => alert(item.id)}
+        render={(toDo) => (
+          <>
+            {toDo.text}
+            <button onClick={() => dispatch(removeTodo(toDo.id))}>
+              remove
+            </button>
+          </>
+        )}
+      />
+      <div >
+        <input type="text" ref={newToRef} />
+        <Button onClick={onAddToDo} >Add to do </Button>
+      </div>
     </div>
   );
 }
